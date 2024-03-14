@@ -41,7 +41,7 @@ function writeToChat(channel, message){
 
 function log(message){
 	const d = new Date();
-	console.log(`${d.toUTCString()} | ${message}`);
+	console.log(`${d.toISOString()} | ${message}`);
 }
 
 function handleCommand(cleanMessage, channel, isMod, username){
