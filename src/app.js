@@ -128,20 +128,32 @@ function handleMessage(cleanMessage, context, channel){
 	}
 
 	const strArr = cleanMessage.split(" ");
+//	console.log(strArr);
 	const newStrArr = [];
 	strArr.forEach(w => {
-		if(w.indexOf("https://") === -1){
+//		console.log(w);
+		if(w.indexOf("https://") !== -1){
 			return;
 		}
+//		console.log(w);
 
-		if(w.indexOf("http://") === -1){
+		if(w.indexOf("http://") !== -1){
 			return;
 		}
+//		console.log(w);
 
 		newStrArr.push(w);
 	});
+//	console.log(newStrArr);
 
-	cleanMessage = newStrArr.join(" ");
+	cleanMessage = newStrArr.join(" ").trim();
+
+//	console.log(cleanMessage);
+
+	if(cleanMessage.length === 0){
+		return;
+	}
+
 
 	if(config.includedUsers.indexOf(context.username) >= 0){
 		translator.translate(cleanMessage, "en", appConfiguration, log)
