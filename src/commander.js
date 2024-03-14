@@ -37,10 +37,10 @@ module.exports = {
 		chat(channelName, "LITBOT will no longer translate your chat messages");
 	},
 
-	handleTranslateCommand: function(channelName, message, username, log, chat){
+	handleTranslateCommand: function(channelName, message, username, appConfiguration, log, chat){
 		const text = message.substring(18);
 
-		translator.translate(text, "en", log)
+		translator.translate(text, "en", appConfiguration, log)
 			.then(translation => {
 				if(translation === undefined){
 					return;
@@ -172,13 +172,13 @@ module.exports = {
 		}
 	},
 
-	handleLangCommand: function(channelName, isMod, splitMessage, languages, updateConfiguration, log, chat){
+	handleLangCommand: function(channelName, isMod, splitMessage, supportedLanguages, updateConfiguration, log, chat){
 		const langSubCommand = splitMessage[2];
 		const langCode = splitMessage[3];
 
 		switch(langSubCommand){
 			case undefined:
-				const languages = currentSetting.join(",");
+				const languages = supportedLanguages.join(",");
 				chat(channelName, `${channelName} currently supports the following langugages: ${languages}`);
 				break;
 			case "add":

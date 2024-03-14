@@ -53,7 +53,7 @@ function handleCommand(cleanMessage, channel, isMod, username){
 			commander.handleHelloCommand(channel, writeToChat);
 	   	    break;
         case "translate":
-			commander.handleTranslateCommand(channel, cleanMessage, username, log, writeToChat);
+			commander.handleTranslateCommand(channel, cleanMessage, username, appConfiguration, log, writeToChat);
     	    break;
 	    case "help":
 			commander.handleHelpCommand(channel, writeToChat);
@@ -144,7 +144,7 @@ function handleMessage(cleanMessage, context, channel){
 	cleanMessage = newStrArr.join(" ");
 
 	if(config.includedUsers.indexOf(context.username) >= 0){
-		translator.translate(appConfiguration["google_project_id"], cleanMessage, "en", log)
+		translator.translate(cleanMessage, "en", appConfiguration, log)
 			.then(translation => {
 				if(translation === undefined){
 					return;
@@ -173,7 +173,7 @@ function handleMessage(cleanMessage, context, channel){
 	//TODO: remove links
 	
 
-	translator.translate(appConfiguration["google_project_id"], cleanMessage, "en", log)
+	translator.translate(cleanMessage, "en", appConfiguration, log)
 		.then(translation => {
 			if(translation != undefined){
 				writeToChat(channel, `${context.username} (${translation.detectedLanguageCode}) => ${translation.translatedText}`);

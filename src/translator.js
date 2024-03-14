@@ -1,27 +1,26 @@
 const { TranslationServiceClient } = require("@google-cloud/translate");
-const configuration = require("./configuration");
 
 module.exports = {
-	translate: function(text, targetLanguage, log){
+	translate: function(text, targetLanguage, appConfiguration, log){
 		const client = new TranslationServiceClient();
-		const projectId = configuration.get("google-project-id");
+		const projectId = appConfiguration["google_project_id"];
 
-		return client.detectLanugage({
-			parent: `project/${projectId}/locations/global`,
+		return client.detectLanguage({
+			parent: `projects/${projectId}/locations/global`,
 			content: text
 		}).then(response => {
 			const detectedLanguage = response[0].languages[0];
-			log(`dectected ${detectedLanguage.languageCode} with ${dectectedLanugage.confidence} confidence for ${text}`);
+			log(`detected ${detectedLanguage.languageCode} with ${detectedLanguage.confidence} confidence for ${text}`);
 
 			if(targetLanguage === detectedLanguage.languageCode){
 				return undefined;
 			}
 
 			return client.translateText({
-				parent: `project/${projectId}/locations/global`,
+				parent: `projects/${projectId}/locations/global`,
 				contents: [text],
 				mimeType: "text/plain",
-				targetLanguageCode: supportedLanguages[0]
+				targetLanguageCode: targetLanguage
 			});
 		}).then(response => {
 			if(response === undefined){
