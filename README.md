@@ -4,6 +4,31 @@
 `npm install tmi.js`
 `npm install "@google-cloud/translate"`
 
+## Create Service
+`cd /lib/systemd/system`
+`sudo litbot.service`
+```
+[Unit]
+Description=Lost in Translation Twitch Bot
+After=network.target
+StartLimitIntervalSec=1
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/node /home/litbot/code/lost-in-translation-bot/src/app.js
+User=litbot
+WorkingDirectory=/home/litbot/code/lost-in-translation-bot/src
+
+[Install]
+WantedBy=default.target
+```
+
+`systemctl start litbot`
+`systemctl status litbot`
+`systemctl stop litbot`
+`systemctl restart litbot`
+
 ## Setup GitHub SSH
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 `ssh-keygen -t ed25519 -C "your_email@example.com"`
