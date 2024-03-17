@@ -28,17 +28,17 @@ The following setup documentation is specific to the Raspberry Pi Model 3B+
     - [Python](#python)
 
 ### Setup GitHub SSH
+The following only need to be done if you plan to contribute to the repository. Otherwise you can just clone with standard HTTPS
+
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 
 `ssh-keygen -t ed25519 -C "your_email@example.com"`
 
 `eval "$(ssh-agent -s)"`
 
-`ssh-add ~/.ssh/id_ed25519`
-add to github account
+add to github account `ssh-add ~/.ssh/id_ed25519`. 
 
-verify the key works
-`ssh -T git@github.com`
+verify the key works `ssh -T git@github.com`. if this doesn't work, go into `~.ssh/id_edi25519.pub` and copy the contents. go to your GitHub account and add a new SSH key with the text in this file
 
 ensure the url for the repo is `git@github.com:ACCOUNT/PROJECT.git`
 
@@ -103,5 +103,11 @@ WantedBy=default.target
 
 # Python
 Raspberry Pi OS comes with Python installed by default
+
+## Install PIP
+`sudo apt install python3-venv python3-pip`
+
+## Install pip packages
+`python3 -m pip install websockets`
 
 ### Create Service
