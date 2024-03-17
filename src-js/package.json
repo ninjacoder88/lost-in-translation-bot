@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@google-cloud/translate": "^8.1.0",
+    "tmi.js": "^1.8.5"
+  }
+}
