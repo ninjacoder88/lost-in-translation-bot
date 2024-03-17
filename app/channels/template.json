@@ -1,0 +1,10 @@
+{
+	"languages": ["en"],
+	"mode": "translate",
+	"state": "on",
+	"replyAs": "chat",
+	"includedUsers": [],
+	"excludedUsers": [],
+	"excludedWords": [],
+	"watchedUsers": {}
+}
