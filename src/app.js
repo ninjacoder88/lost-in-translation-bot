@@ -336,7 +336,7 @@ function setupChannel(twitchStream){
 }
 
 function setupChannels(){
-
+	log("setupChannels()");
  	const channelsJson = fs.readFileSync("channels.json");
 	const channelNames = JSON.parse(channelsJson);
 
